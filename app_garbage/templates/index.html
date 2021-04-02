@@ -1,0 +1,71 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1 class="text-center">Eintrag Hinzufügen</h1>
+
+<div class="container">
+{{map|safe}}
+
+<div id="demo">
+</div>
+<div class="text-center">
+<button class="btn btn-success mt-3 ">Hier liegt Müll!</button>
+</div>
+</div>
+
+
+<script>
+
+    function getLocation() {
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+      } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+      }
+    }
+    
+    function showPosition(position) {
+     document.cookie = "lat="+position.coords.latitude
+     document.cookie = "lon="+position.coords.longitude;
+    };
+
+    function getMarker(){
+      for (obj of Object.keys(window.window["0"])){
+        if (obj.includes("marker")){
+          return window.window["0"][obj]
+       }
+      }
+    };
+
+    window.addEventListener('load', function() {
+      var x = document.getElementById("demo");
+      marker = getMarker();
+      console.log(marker.getLatLng());
+
+      marker.addEventListener("dragend", function(){
+      console.log(marker.getLatLng());
+
+      getLocation();
+
+    });
+
+    });
+
+   
+
+  
+
+
+
+  
+
+
+    
+   
+
+
+    </script>
+
+
+{% endblock %}
