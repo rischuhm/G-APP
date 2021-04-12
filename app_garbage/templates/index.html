@@ -2,70 +2,63 @@
 
 {% block content %}
 
-<h1 class="text-center">Eintrag Hinzufügen</h1>
-
-<div class="container">
-{{map|safe}}
-
-<div id="demo">
-</div>
-<div class="text-center">
-<button class="btn btn-success mt-3 ">Hier liegt Müll!</button>
-</div>
+<div class=" container text-center">
+  <div class="row">
+  <h1 class=" display-4 mt-5">MAPPS Leipzig</h1>
+  <h1 class="display-5">Ein Projekt. Ein Ziel.</h1>
+  <h1 class="display-5 mb-5">Unsere Stadt.</h1>
 </div>
 
+<div class="row">
+  <div class="col-md-6">
+  <h4>So sieht es aus.</h4>
+  <p>In vielen Nachbarschaften sammelt sich Sperrmüll, anderer Abfall findet sich an Gehwegrändern und Gebüschen,
+    Hundekot liegt auf allen Wegen, Straßen sind kaum befahrbar.
+    Dieses Bild kennen wir alle und für viele dieser Herausforderungen gibt es einfache Lösungen.
+  </p>
+</div>
 
-<script>
+<div class="col-md-6">
+  <h4>Die Herausforderung.</h4>
+  <p>Leipzig ist in seiner Verwaltung an vielen Stellen bereits fortschrittlich, aber es fehlt noch an gezielten
+    Datenerhebungen, um effektiv an Lösungen zu arbeiten. Dabei ist es heute so einfach wie noch nie, solche Vorhabungen
+    umzusetzen.</p>
+  </div>
 
-    function getLocation() {
-      if (navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showPosition);
-      } else {
-        x.innerHTML = "Geolocation is not supported by this browser.";
-      }
-    }
-    
-    function showPosition(position) {
-     document.cookie = "lat="+position.coords.latitude
-     document.cookie = "lon="+position.coords.longitude;
-    };
+  <div class="col-md-6">
+  <h4>Welche Lösungen wollen wir anbieten?</h4>
+  <p>Durch gemeinsames Kartografieren wollen wir mit euch  Hotspots für bspw. Spermmülllager und akute
+    Dreckecken herausfinden, um zusammen mit anderen Projekten und Institutionen Lösungen zu entwickeln.</p>
+  </div>
+  <div class="col-md-6">
+  <h4>Unser Ziel.</h4>
+  <p>Natürlich ist ein schöneres Stadtbild ein Ziel, jedoch wollen wir in erster Linie mehr Achtsamkeit schaffen - und
+    das ohne erhobenen Zeigefinger. Wir wollen Präsenz zeigen und helfen und selbst zu helfen.</p>
+  </div>
+  </div>
 
-    function getMarker(){
-      for (obj of Object.keys(window.window["0"])){
-        if (obj.includes("marker")){
-          return window.window["0"][obj]
-       }
-      }
-    };
+  <div class="row mt-5">
+    <div class="col-md-6 offset-md-3">
+  <h4>Fragen oder Anregungen?</h4>
+  <h4>Kontaktier uns gern!</h4>
 
-    window.addEventListener('load', function() {
-      var x = document.getElementById("demo");
-      marker = getMarker();
-      console.log(marker.getLatLng());
-
-      marker.addEventListener("dragend", function(){
-      console.log(marker.getLatLng());
-
-      getLocation();
-
-    });
-
-    });
-
-   
-
-  
-
-
-
-  
+  <form action="POST">
+    <div class="form-group">
+    <input class="form-control mb-2" type="text" placeholder="Dein Name">
+    <input class="form-control mb-2" type="email" placeholder="Deine Email">
+    <textarea class="form-control mb-2" type="text" placeholder="Dein Anliegen"></textarea>
+    <button class="btn btn-success mb-5"type="submit" formaction="">Absenden</button>
+  </div>
+</div>
+</div>
+  </form>
 
 
-    
-   
 
 
-    </script>
 
+
+
+</div>
 
 {% endblock %}

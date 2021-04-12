@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block js %}
+<script src="{% static 'js/muellscript.js'%}"></script>
+{%endblock%}
+
+
+{% block content %}
+
+<h1 class="text-center display-5 my-3">Eintrag Hinzufügen</h1>
+
+<div class="container">
+  <div style="height:50vh">
+    {{map | safe}}
+  </div>
+
+
+  <div class="text-center">
+    <button id="findme" class="btn btn-primary my-3">Orte mich!</button>
+    <form>
+      <input type="text" name="lat"><br>
+      <input type="text" name="lon"><br>
+      <button class="btn btn-success mt-3 ">Hier liegt Müll!</button>
+    </form>
+
+  </div>
+</div>
+
+{% endblock %}
