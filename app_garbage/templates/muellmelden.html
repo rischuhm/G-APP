@@ -2,6 +2,8 @@
 
 {% load static %}
 
+{%block title%}Müll melden{%endblock%}
+
 {% block js %}
 <script src="{% static 'js/muellscript.js'%}"></script>
 {%endblock%}
@@ -9,22 +11,29 @@
 
 {% block content %}
 
-<h1 class="text-center display-5 my-3">Eintrag Hinzufügen</h1>
+<h1 class="text-center display-5 my-3">Müll melden</h1>
 
 <div class="container">
   <div style="height:50vh">
     {{map | safe}}
   </div>
 
-
   <div class="text-center">
-    <button id="findme" class="btn btn-primary my-3">Orte mich!</button>
-    <form>
-      <input type="text" name="lat"><br>
-      <input type="text" name="lon"><br>
-      <button class="btn btn-success mt-3 ">Hier liegt Müll!</button>
-    </form>
+    <div class="row">
+      <div class="col-6">
+         <button id="findme" class="btn btn-primary mt-3 col-12"><i class="bi bi-geo"></i> Orte mich!</button>
+        <p id="address-text" class=" d-none"> Du bist hier<br><span id="address">&nbsp;</span></p>
+      </div>
+      <div class="col-6">
+        <form method="POST">
+          {% csrf_token %}
+          <button formaction="neuer_eintrag" class="btn btn-success mt-3 col-12"><i class="bi bi-trash"></i> Müll melden!</button>
+          <input type="hidden" name="lat" val="51.3396955"><br>
+          <input type="hidden" name="lon" val="12.3730747"><br>  
+        </form>
 
+      </div>
+    </div>
   </div>
 </div>
 
