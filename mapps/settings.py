@@ -121,4 +121,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-STATIC_ROOT = "/home/ubuntu/mapps/static/"
+STATIC_ROOT = "/code/app/static/"

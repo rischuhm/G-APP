@@ -1,4 +1,4 @@
-FROM quay.io/bitnami/python:3.8-prod
+FROM python:3.8-buster
 
 RUN mkdir -p /code/app
 WORKDIR /code/app
