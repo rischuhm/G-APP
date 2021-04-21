@@ -10,7 +10,9 @@ RUN pip install -r requirements.txt \
  && pip install supervisor
 
 RUN apt-get update \
- && apt-get install -y nginx
+ && apt-get install -y nginx \
+ && apt-get install -y certbot \
+ && apt-get install -y python-certbot-nginx 
 
 ADD docker/nginx.conf /etc/nginx/nginx.conf
 
