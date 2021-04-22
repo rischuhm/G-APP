@@ -18,21 +18,22 @@ def muellmelden(request):
 
 
 
-    m = folium.Map(location=[lat,lon],zoom_start=14,width="100%",height="100%", position="static")
+    m = folium.Map(location=[lat,lon],zoom_start=14,width="100%",height="100%")
       
     icon = folium.Icon(color="red", icon="trash", prefix="fa")
     folium.Marker([lat, lon], draggable=True, icon=icon).add_to(m)
 
+
+    
     for entry in entries: 
         icon = folium.Icon(color="blue", icon="trash", prefix="fa", angle=10)
         folium.Marker([entry.lat,entry.lon], icon=icon).add_to(m)
-
     
     m = m._repr_html_()
     m = re.search("<iframe.*</iframe>",m).group(0)
     m = re.sub("position:.*?;","position:static;",m)
-
-    return render(request,"muellmelden.html",{"map":m})
+    marker_name = re.search("var%20(marker_.*?)%20",m).group(1)
+    return render(request,"muellmelden.html",{"map":m, "marker_name":marker_name})
 
 
 def add_entry(request):

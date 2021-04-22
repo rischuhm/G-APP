@@ -28,8 +28,9 @@
         <form method="POST">
           {% csrf_token %}
           <button formaction="neuer_eintrag" class="btn btn-success mt-3 col-12"><i class="bi bi-trash"></i> Müll melden!</button>
-          <input type="hidden" name="lat" val="51.3396955"><br>
-          <input type="hidden" name="lon" val="12.3730747"><br>  
+          <input type="hidden" name="lat" value="51.3396955"><br>
+          <input type="hidden" name="lon" value="12.3730747"><br>  
+          <input type="hidden" name="marker_name" value={{marker_name}}>
         </form>
 
       </div>
