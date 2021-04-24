@@ -4,7 +4,7 @@ function getLocation() {
 
 function updateMarker(position) {
     address_field = document.getElementById("address");
-    marker = getMarker();
+    marker = window.window[0][document.getElementsByName("marker_name")[0].value];
     map = getMap();
     lat = position.coords.latitude;
     lon = position.coords.longitude;
@@ -42,7 +42,7 @@ function catchAddressData(address_field,lat,lon){
 }
 
 
-document.getElementsByTagName("iframe")[0].addEventListener('load', function () {
+window.addEventListener('load', function () {
     btn_findme = document.getElementById("findme");
     address_field = document.getElementById("address");
 
