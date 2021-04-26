@@ -1,7 +1,8 @@
+from django.http.response import JsonResponse
 from django.shortcuts import render,redirect
+from django.core import serializers
 from django.http import HttpResponse
 import folium, re, datetime
-
 from .models import Entry
 
 # Create your views here.
@@ -11,26 +12,11 @@ def index(request):
 
 
 def muellmelden(request):
-    entries = Entry.objects.filter(date__gte=datetime.date.today())
-    
-    lat =  51.3396955
-    lon =  12.3730747
+    return render(request,"muellmelden.html")
 
-    m = folium.Map(location=[lat,lon],zoom_start=14,width="100%",height="100%")
-    
-    for entry in entries: 
-        icon = folium.Icon(color="blue", icon="trash", prefix="fa", angle=10)
-        folium.Marker([entry.lat,entry.lon], icon=icon).add_to(m)
-
-    icon = folium.Icon(color="red", icon="trash", prefix="fa")
-    folium.Marker([lat, lon], draggable=True, icon=icon).add_to(m)
-    
-    m = m._repr_html_()
-    m = re.search("<iframe.*</iframe>",m).group(0)
-    m = re.sub("position:.*?;","position:static;",m)
-    marker_name = re.findall("var%20(marker_.*?)%20",m)[-1]
-    print(marker_name)
-    return render(request,"muellmelden.html",{"map":m, "marker_name":marker_name})
+def fetch(request):
+    entries = serializers.serialize("json",Entry.objects.filter(date__gte=datetime.date.today()))
+    return JsonResponse(entries, safe=False)
 
 
 def add_entry(request):
@@ -39,7 +25,7 @@ def add_entry(request):
 
     entry = Entry(lat=lat,lon=lon)
     entry.save()
-    return redirect(muellmelden)
+    return render(request,"muellmelden.html")
 
 
 def show_entries(request):
@@ -51,7 +37,8 @@ def show_entries(request):
     m = folium.Map(location=[lat,lon],zoom_start=12)
 
     for entry in entries: 
-        folium.Marker([entry.lat,entry.lon]).add_to(m)
+        icon = folium.Icon(color="blue", icon="trash", prefix="glyphicon")
+        folium.Marker([entry.lat,entry.lon], icon=icon).add_to(m)
 
     m = m._repr_html_()
 
