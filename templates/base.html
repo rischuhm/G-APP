@@ -40,10 +40,10 @@
             <a class="nav-link active" aria-current="page" href="/">Start</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="muellmelden">Müll melden</a>
+            <a class="nav-link" href="/muell/muellmelden">Müll melden</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="eintraege">Einträge</a>
+            <a class="nav-link" href="/muell/eintraege">Einträge</a>
           </li>
         </ul>
       </div>
@@ -54,6 +54,10 @@
 
   {% endblock %}
 
+
+<footer class="bg-dark py-3" style="position: absolute; bottom:0; width:100%;text-align: center;">
+<a style="text-decoration: none; color:white" href="/impressum">Impressum</a> &nbsp; <a style="text-decoration: none; color:white" href="/datenschutz">Datenschutz</a>
+</footer>
 
   {% block js %}{% endblock %}
 </body>

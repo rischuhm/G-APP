@@ -1,21 +1,16 @@
 from django.http.response import JsonResponse
-from django.shortcuts import render,redirect
+from django.shortcuts import render
 from django.core import serializers
-from django.http import HttpResponse
-import folium, re, datetime
-from .models import Entry
+import folium, datetime
+from .models import Garbage_Entry
 
 # Create your views here.
-
-def index(request):
-    return render(request,"index.html")
-
 
 def muellmelden(request):
     return render(request,"muellmelden.html")
 
-def fetch(request):
-    entries = serializers.serialize("json",Entry.objects.filter(date__gte=datetime.date.today()))
+def fetch():
+    entries = serializers.serialize("json",Garbage_Entry.objects.filter(date__gte=datetime.date.today()))
     return JsonResponse(entries, safe=False)
 
 
@@ -23,7 +18,7 @@ def add_entry(request):
     lat = request.POST.get("lat")
     lon = request.POST.get("lon")
 
-    entry = Entry(lat=lat,lon=lon)
+    entry = Garbage_Entry(lat=lat,lon=lon)
     entry.save()
     return render(request,"muellmelden.html")
 
