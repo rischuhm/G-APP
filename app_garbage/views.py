@@ -9,7 +9,7 @@ from .models import Garbage_Entry
 def muellmelden(request):
     return render(request,"muellmelden.html")
 
-def fetch():
+def fetch(request):
     entries = serializers.serialize("json",Garbage_Entry.objects.filter(date__gte=datetime.date.today()))
     return JsonResponse(entries, safe=False)
 
@@ -24,7 +24,7 @@ def add_entry(request):
 
 
 def show_entries(request):
-    entries = Entry.objects.all()
+    entries = Garbage_Entry.objects.all()
 
     lat = 51.3396955
     lon = 12.3730747
